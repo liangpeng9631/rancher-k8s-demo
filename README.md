@@ -1,39 +1,116 @@
-# full_container_station_scheme
+# 全容器站方案
 
-#### 项目介绍
-{**以下是码云平台说明，您可以替换为您的项目简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+#### 1.交付docker环境(centos7.2-ucloud)
 
-#### 软件架构
-软件架构说明
+###### //修改时区为上海
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+###### //禁用seliunx
+vi /etc/selinux/config
+###### //将SELINUX=enforcing改为SELINUX=disabled 重启机器即可
 
-#### 安装教程
+###### //修改服务器hostName,这里修改成内网IP便于理解 xxx-xxx-xxx-xxx 不可以用"."
+hostnamectl --static set-hostname <host-name>
 
-1. xxxx
-2. xxxx
-3. xxxx
+###### //关闭firewall
+###### //停止firewall
+systemctl stop firewalld.service
 
-#### 使用说明
+###### //禁止firewall开机启动
+systemctl disable firewalld.service
 
-1. xxxx
-2. xxxx
-3. xxxx
+###### //查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+firewall-cmd --state
 
-#### 参与贡献
+###### //创建docker软链接,映射数据盘,系统默认空间是不足的。
+cd /data/
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+mkdir docker
 
+ln -s /data/docker /var/lib/docker
 
-#### 码云特技
+###### //安装依赖
+yum -y install policycoreutils-python selinux-policy-base selinux-policy-targeted libseccomp libtool-ltdl device-mapper-libs
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+###### //安装docker,这里以rmp包方式安装
+rpm -ivh docker-engine-selinux-1.12.6-1.el7.centos.noarch.rpm
+
+###### //会出现如下错误,可以忽略,至今没有对线上docker环境有任何影响
+###### //setsebool:  SELinux is disabled.
+###### //Re-declaration of type docker_t
+###### //Failed to create node
+###### //Bad type declaration at /etc/selinux/targeted/tmp/modules/400/docker/cil:1
+###### ///usr/sbin/semodule:  Failed!
+
+###### //安装docker主程序
+rpm -ivh docker-engine-1.12.6-1.el7.centos.x86_64.rpm
+
+###### //启动docker
+service docker start
+
+###### //查看docker信息系
+docker info
+
+###### //增加docker国内镜像加速站点与私有镜像库地址
+###### //备注: /etc/docker/daemon.json是json格式{}
+vi /etc/docker/daemon.json
+###### //增加"registry-mirrors": ["https://registry.docker-cn.com"]
+
+###### //增加http方式镜像库
+vi /etc/docker/daemon.json
+###### //增加"insecure-registries":["你镜像库的IP:你镜像库的端口"],这里为了演示方便就使用当前主机的内网IP
+###### //添加完成如下,重启docker生效
+###### //{"registry-mirrors": ["https://registry.docker-cn.com"],"insecure-registries":["10.23.187.165:5000"]}
+
+service docker restart
+
+###### //至此,docker环境交付完毕
+
+#### 2.交付私有镜像库
+
+docker run -d -p 5000:5000 --name registry registry:2
+
+###### //拉取一个nginx镜像测试推送至私有镜像库
+docker pull nginx
+
+###### //docker tag 地址:端口/名称:版本
+docker tag nginx 10.23.187.165:5000/nginx:test
+
+docker push 10.23.187.165:5000/nginx:test
+###### //推送完毕代表镜像库已经交付
+###### //至此,docker环境交付完毕
+
+#### 3.交付rancher,生产环境需要数据库外挂方式部署,参照官方文档
+sudo docker run -d --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro -p 8080:8080 rancher/server:v1.6.18
+###### //若干分钟就可以通过8080端口访问rancher后台
+###### //添加自己的管理员账号密码
+###### //在系统设置增加自定义应用商店
+###### //名称:library
+###### //地址:https://git.oschina.net/rancher/rancher-catalog.git
+###### //分支:k8s-v1.6-release
+# rancher文档:
+https://rancher.com/docs/rancher/v1.6/zh/kubernetes/
+
+# JAVA例子项目:
+https://gitee.com/aisao/k8s_java_project_demo
+
+# PHP例子项目:
+https://gitee.com/aisao/k8s_php_project_demo
+
+# dotnet core 2.1例子项目
+https://gitee.com/aisao/k8s_dnet_project_demo
+
+# JAVA卡夫卡队列生产者例子项目:
+https://gitee.com/aisao/k8s_java_kafka_pdt_demo
+
+# JAVA卡夫卡队列消费者例子项目:
+https://gitee.com/aisao/k8s_java_kafka_cmt_demo
+
+# JAVA基础镜像:
+docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/centos_jdk_18065:v1.0
+
+# NGX_PHP基础镜像:
+docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/centos_ngx_php:v1.0
+
+# dnet基础镜像:
+docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/dotnet:2.1-aspnetcore-runtime

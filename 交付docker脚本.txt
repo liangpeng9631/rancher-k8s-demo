@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#登录到目标机器创建脚本,chmod授权运行,注意需要设置私有镜像库IP与端口
+
+yum -y install wget
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime;
+
+systemctl stop firewalld.service;
+
+systemctl disable firewalld.service;
+
+firewall-cmd --state;
+
+mkdir -p /data/
+
+cd /data/;
+
+wget http://oh7g4ad14.bkt.clouddn.com/docker-engine-selinux-1.12.6-1.el7.centos.noarch.rpm;
+
+wget http://oh7g4ad14.bkt.clouddn.com/docker-engine-1.12.6-1.el7.centos.x86_64.rpm;
+
+mkdir -p docker;
+
+ln -s /data/docker /var/lib/docker;
+
+yum -y install policycoreutils-python selinux-policy-base selinux-policy-targeted libseccomp libtool-ltdl device-mapper-libs;
+
+rpm -ivh docker-engine-selinux-1.12.6-1.el7.centos.noarch.rpm
+
+rpm -ivh docker-engine-1.12.6-1.el7.centos.x86_64.rpm
+
+service docker start
+
+tee /etc/docker/daemon.json <<-'EOF'
+{"registry-mirrors": ["https://registry.docker-cn.com"],"insecure-registries":["私有镜像库IP:端口"],"log-driver": "json-file","log-opts": {"max-size":"5m"}}
+EOF
+
+service docker restart

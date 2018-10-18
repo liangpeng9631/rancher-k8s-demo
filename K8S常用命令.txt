@@ -1,0 +1,13 @@
+#当前文档主要是Rancher下的k8s使用
+
+
+#查看k8s基础服务运行状态
+kubectl get pods -n kube-system
+
+
+#查看某一个pods事件,用于排查重启等异常
+kubectl describe pod podname
+
+
+#查看日志
+kubectl logs pods名称 -n 命名空间

@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: {project}
+  namespace: {namespace}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {project}
+        version: {version}
+    spec:
+      nodeSelector:
+        {tagName}: {tagVal}
+      containers:
+      - name: {project}
+        image: {img}
+        volumeMounts:
+        - name: time
+          mountPath: /etc/localtime
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="java_jetty" default="dist" basedir=".">
+  
+	<description> JAVA WEB 项目构建 </description>
+  
+	<!-- 项目名称/代码文件夹名称 -->
+	<property name="projectName" value="${pjname}"/><!-- 需要修改 -->
+	
+	<!-- 项目根路径 -->
+	<property name="basePath" location="../../../project/${pjcontext}/${projectName}"/><!-- 需要修改 -->
+  
+	<!-- 配置文件执行路径 -->
+    <property name="conf"     location="${basePath}/src/com/app/conf/info"/><!-- 需要修改 -->
+	
+	<!-- 配置文件保存路径 -->
+    <property name="confDoc"  location="${basePath}/doc/conf/${pjcontext}"/><!-- 需要修改 -->
+	
+	<!-- 源码路径 -->
+	<property name="src"      location="${basePath}/src"/>
+	
+	<!-- 编译后的class路径 -->
+	<property name="build"    location="${basePath}/WebContent/"/>
+  
+	<!-- 依赖包路径 -->
+    <property name="lib"      location="${basePath}/lib"/>
+	
+	<!-- 站点根路径 -->
+    <property name="pub"      location="${basePath}/pub"/>
+	
+	<!-- 服务器信息 -->
+	<property name="ip"        value="${pjip}"/>
+	<property name="port"      value="${pjport}"/>
+	<property name="user"      value="${pjuser}"/>
+	<property name="password"  value="${pjpassword}"/>
+	<property name="work"      value="/data/server/${projectName}"/>
+	<property name="runPort"   value="${pjrunport}"/>
+	
+	<!-- 依赖包设置 -->
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<!-- 项目目录初始化 -->
+	<target name="init">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${conf}"/>
+		<mkdir dir="${build}/lib"/>
+		<mkdir dir="${build}/pub"/>
+	</target>
+	
+	<!-- 拷贝配置文件 -->
+	<target name="copyResource" depends="init">
+		
+		<!-- 拷贝jar文件 -->
+		<copy todir="${build}/lib" overwrite="true">
+			<fileset dir="${lib}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+		
+		<!-- 拷贝项目根目录资源文件 -->
+		<copy todir="${build}" overwrite="true">
+			<fileset dir="${basePath}">
+				<include name="*.*" />
+				<include name="DockerFile" />
+			</fileset>
+		</copy>
+		
+		<!-- 拷贝项目源码目录资源文件 -->
+		<copy todir="${build}" overwrite="true">
+			<fileset dir="${src}">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+		
+		<!-- 拷贝站点根路径文件 -->
+		<copy todir="${build}/pub" overwrite="true">
+			<fileset dir="${pub}"/>
+		</copy>
+		
+		<!-- 拷贝配置文件 -->
+		<copy todir="${conf}" overwrite="true">
+			<fileset dir="${confDoc}">
+				<include name="*.java" />
+			</fileset>
+		</copy>
+		
+	</target>
+	
+	<!-- 编译源码 -->
+	<target name="compile" depends="copyResource" description="">
+		
+		<!-- 编译源码 -->
+		<javac srcdir="${src}" destdir="${build}" encoding="utf-8" includeantruntime="" debug="on">
+			<compilerarg value="-XDignore.symbol.file"/>
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	
+	<!-- 生成压缩包/部署文件 -->
+	<target name="dist" depends="compile" description="">
+		
+		<!-- 初始化目录 -->
+		<sshexec host="${ip}" username="${user}"  password="${password}" trust="true" command="rm -rf /data/server/${projectName}/;mkdir -p /data/server/${projectName}/" port="${port}"/>
+		
+		<!-- 拷贝文件至远程站点 -->
+		<scp todir="${user}@${ip}:${work}" password="${password}" trust="true" port="${port}">
+			<fileset dir="${build}"/>
+		</scp>
+
+		<!-- 清理缓存文件 -->
+		<delete dir="${build}"/>
+		<delete dir="${conf}"/>
+		
+		<!-- 重新启动服务 -->
+		<sshexec host="${ip}" username="${user}"  password="${password}" trust="true" command="sed -i 's/#/${projectName}/g' /data/server/${projectName}/DockerFile;dos2unix /data/server/${projectName}/*.sh;chmod -R 775 /data/server;/data/server/${projectName}/build_images.sh ${projectName} ${prip} ${prport} ${ptag}" port="${port}"/>
+
+	</target>
+
+</project>

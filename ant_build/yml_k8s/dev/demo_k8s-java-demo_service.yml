@@ -1,0 +1,39 @@
+#服务
+kind: Service
+apiVersion: v1
+#数据描述[元数据]
+metadata:
+  #名称
+  name: k8s-java-demo
+  #命名空间
+  namespace: demo
+  #标签
+  labels:
+    #对应的应用标签
+    app: k8s-java-demo
+    #对应的应用版本
+    version: 
+#规格
+spec:
+  #容器
+  selector:
+    #应用
+    app: k8s-java-demo
+    #对应的应用版本
+    version: 
+  #端口
+  ports:
+      #名称
+    - name: k8s-java-demo
+      #协议
+      protocol: TCP
+      #对外开放端口
+      port: 20001
+      #容器开放端口
+      targetPort: 80
+  #类型
+  type: NodePort
+  #对外开放的IP地址
+  externalIPs:
+    #地址
+    - 192.168.32.172

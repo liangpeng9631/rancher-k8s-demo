@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: k8s-java-demo
+  namespace: demo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-java-demo
+        version: 
+    spec:
+      nodeSelector:
+        server.node: service
+      containers:
+      - name: k8s-java-demo
+        image: 192.168.32.216:5000/k8s_java_project_demo:
+        volumeMounts:
+        - name: time
+          mountPath: /etc/localtime
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime

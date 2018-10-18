@@ -1,0 +1,5 @@
+#查看全部镜像
+http://{ip}:{port}/v2/_catalog
+
+#查看镜像版本列表
+http://{ip}:{port}/v2/{images}/tags/list

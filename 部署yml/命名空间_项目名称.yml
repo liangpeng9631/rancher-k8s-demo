@@ -1,0 +1,55 @@
+#应用
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  #名称
+  name: {项目名称}
+  #命名空间
+  namespace: {命名空间}
+spec:
+  #启动应用数量
+  replicas: 1
+  #模板
+  template:
+    #数据描述[元数据]
+    metadata:
+      #标签
+      labels:
+        #应用
+        app: {项目名称}
+        #版本
+        version: {首次发布的tag}
+    #规格
+    spec:
+      #调度规则,指定部署在指定标签节点中  调度key: 调度值 默认为rancher compute=true标签主机
+      nodeSelector:
+        {标签名称}: {标签值}
+      #容器
+      containers:
+        #名称
+      - name: {项目名称}
+        #镜像
+        image: {镜像库地址}
+        #镜像挂载目录
+        volumeMounts:
+        - name: time
+          mountPath: /etc/localtime
+        #计算资源配置
+        resources:
+          #启动限制
+          requests:
+            #初始化CPU用量
+            cpu: "100m"
+            #初始化内存用量
+            memory: "128Mi"
+          #最大限制
+          limits:
+            #限制CPU最大用量
+            cpu: "100m"
+            #限制内存最大用量
+            memory: "256Mi"
+      #实际目录挂载
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime
