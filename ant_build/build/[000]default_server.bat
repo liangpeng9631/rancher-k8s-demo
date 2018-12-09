@@ -1,24 +1,30 @@
-:------------------------------ 配置 ------------------------------
+rem ------------------------------ 配置 ------------------------------
 
-:镜像编译服务地址
+rem 镜像编译服务地址
 set imagesBuildServerIp=
 
-:镜像编译服务端口
+rem 镜像编译服务端口
 set imagesBuildServerPort=
 
-:镜像编译服务账号
+rem 镜像编译服务账号
 set imagesBuildServerUser=
 
-:镜像编译服务密码
+rem 镜像编译服务密码
 set imagesBuildServerPwd=
 
-:镜像库地址
+rem 镜像库地址
 set imagesRegistryIp=
 
-:镜像库端口
+rem 镜像库端口
 set imagesRegistryPort=
 
-:yml-k8s访问IP
+rem yml-k8s访问IP
 set k8sPortIp=
 
-:------------------------------ 配置 ------------------------------
+rem rancherApi秘钥
+set rancherApiKey=
+
+rem rancherApi地址
+set rancherApiUrl=
+
+rem ------------------------------ 配置 ------------------------------
