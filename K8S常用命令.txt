@@ -12,6 +12,9 @@ kubectl describe pod podname
 #查看日志
 kubectl logs pods名称 -n 命名空间
 
+#进入pods
+kubectl exec -it pods名称 -n 命名空间 /bin/bash
+
 #rancher下调用K8sApi请求头权签
 curl -v \
 -H "Authorization:[空格]Bearer[空格]BASE64(Basic[空格]BASE64(<AccessKey>:<SecretKey>))" \
