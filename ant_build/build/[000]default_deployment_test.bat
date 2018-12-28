@@ -1,50 +1,22 @@
 rem 更新应用
 if "%context%"=="test" (
 
-rem 删除应用
+rem 更新pods更新
 echo %dir%..\curl\curl
-echo -X DELETE
+echo -X PATCH
 echo -H "Authorization:Bearer %rancherApiKey%"
-echo -H "Content-Type: application/yaml"
-echo -T "%dir%..\del.yml"
+echo -H "Content-Type: application/strategic-merge-patch+json" 
+echo -T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.json"
 echo %rancherApiUrl%/apis/apps/v1beta1/namespaces/%k8sNamespace%/deployments/%k8sName%
-%dir%..\curl\curl -X DELETE -H "Authorization:Bearer %rancherApiKey%" -H "Content-Type: application/yaml" -T "%dir%..\del.yml" %rancherApiUrl%/apis/apps/v1beta1/namespaces/%k8sNamespace%/deployments/%k8sName%
-echo ----------------------------------------------------------------------------------------------------
 
-rem 删除服务
-echo %dir%..\curl\curl
-echo -X DELETE
-echo -H "Authorization:Bearer %rancherApiKey%"
-echo -H "Content-Type: application/yaml"
-echo -T "%dir%..\del.yml"
-echo %rancherApiUrl%/api/v1/namespaces/%k8sNamespace%/services/%k8sName%
-%dir%..\curl\curl -X DELETE -H "Authorization:Bearer %rancherApiKey%" -H "Content-Type: application/yaml" -T "%dir%..\del.yml" %rancherApiUrl%/api/v1/namespaces/%k8sNamespace%/services/%k8sName%
-echo ----------------------------------------------------------------------------------------------------
+rem 创建提交的xml
+echo {"spec":{"template":{"spec":{"containers":[{"name":"%k8sName%","image":"%imagesRegistryIp%:%imagesRegistryPort%/%name%:%tag%"}]}}}} > %dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.json
 
-rem 提交pods部署
-echo %dir%..\curl\curl
-echo -X POST
-echo -H "Authorization:Bearer %rancherApiKey%"
-echo -H "Content-Type: application/yaml"
-echo -T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.yml"
-echo %rancherApiUrl%/apis/extensions/v1beta1/namespaces/%k8sNamespace%/deployments
-%dir%..\curl\curl -X POST -H "Authorization:Bearer %rancherApiKey%" ^
--H "Content-Type: application/yaml" ^
--T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.yml" ^
-%rancherApiUrl%/apis/extensions/v1beta1/namespaces/%k8sNamespace%/deployments
-echo ----------------------------------------------------------------------------------------------------
-
-rem 提交service部署
-echo %dir%..\curl\curl
-echo -X POST
-echo -H "Authorization:Bearer %rancherApiKey%"
-echo -H "Content-Type: application/yaml"
-echo -T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%_service.yml"
-echo %rancherApiUrl%/api/v1/namespaces/%k8sNamespace%/services
-%dir%..\curl\curl -X POST -H "Authorization:Bearer %rancherApiKey%" ^
--H "Content-Type: application/yaml" ^
--T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%_service.yml" ^
-%rancherApiUrl%/api/v1/namespaces/%k8sNamespace%/services
+rem 提交更新文件
+%dir%..\curl\curl -X PATCH -H "Authorization:Bearer %rancherApiKey%" ^
+-H "Content-Type: application/strategic-merge-patch+json" ^
+-T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.json" ^
+%rancherApiUrl%/apis/apps/v1beta1/namespaces/%k8sNamespace%/deployments/%k8sName%
 echo ----------------------------------------------------------------------------------------------------
 
 )
