@@ -33,9 +33,9 @@ spec:
         version: {version}
     #规格
     spec:
-      #调度规则,指定部署在指定标签节点中  调度key: 调度值 默认为rancher compute=true标签主机
-      nodeSelector:
-        {tagName}: {tagVal}
+
+
+
       #容器
       containers:
         #名称
