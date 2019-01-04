@@ -2,6 +2,9 @@
 
 #登录到目标机器创建脚本,chmod授权运行,注意需要设置私有镜像库IP与端口
 
+#disable seliunx
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
 yum -y install wget
 
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime;
