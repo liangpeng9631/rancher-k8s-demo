@@ -27,7 +27,7 @@ rd /S/Q .\%name%
 
 rem 拉取代码
 if %build%==y (
-cls
+rem cls
 call git clone -b %tag% %url% %name%
 
 rem 记录tag说明信息
@@ -38,7 +38,7 @@ call git tag %tag% -l -n >> ..\..\..\logs\%context%\%projectPort%_%k8sName%.log
 rem 执行ant脚本 pjname 名称 pjcontext 环境 pjip 服务器IP pjport 端口 pjuser 用户 pjpassword 密码 pjrunport 容器端口
 cd %dir%bin\standard
 if %build%==y (
-cls
+rem cls
 call ..\..\..\apache-ant-1.10.1\bin\ant -file .\standard_"%type%".xml -Dpjname="%name%" -Dpjcontext="%context%" -Dpjip="%imagesBuildServerIp%" -Dpjport="%imagesBuildServerPort%" -Dpjuser="%imagesBuildServerUser%" -Dpjpassword="%imagesBuildServerPwd%" -Dpjrunport="%projectPort%" -Dptag="%tag%" -Dprip="%imagesRegistryIp%" -Dprport="%imagesRegistryPort%"
 )
 
@@ -47,14 +47,18 @@ cd %dir%
 call [000]default_pods.bat
 call [000]default_pods_service.bat
 
+rem 更新部署
+if %update%==2 (
+call [000]default_deployment_update.bat
+)
+
 rem 重新部署
-if %update%==y (
-call [000]default_deployment_dev.bat
-call [000]default_deployment_test.bat
+if %update%==3 (
+call [000]default_deployment_push.bat
 )
 
 rem 输出选项
-cls
+rem cls
 echo -------------------
 echo tag:%tag%
 echo context:%context%
@@ -66,7 +70,7 @@ echo port:%projectPort%
 echo node:%node%
 echo namespace:%k8sNamespace%
 echo appname:%k8sName%
-echo images:%imagesRegistryIp%:%imagesRegistryPort%/%k8sName%:%tag%
+echo images:%imagesRegistryIp%:%imagesRegistryPort%/%name%:%tag%
 echo --------------------
 
 rem 记录tag消息

@@ -1,5 +1,4 @@
 rem 更新应用
-if "%context%"=="dev" (
 
 rem 更新pods更新
 echo %dir%..\curl\curl
@@ -18,5 +17,3 @@ rem 提交更新文件
 -T "%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%.json" ^
 %rancherApiUrl%/apis/apps/v1beta1/namespaces/%k8sNamespace%/deployments/%k8sName%
 echo ----------------------------------------------------------------------------------------------------
-
-)

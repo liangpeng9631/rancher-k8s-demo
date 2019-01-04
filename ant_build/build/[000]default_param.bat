@@ -1,47 +1,54 @@
 rem tag信息
 :restart
-cls
+rem cls
 set /p tag=please input git [tag] info:
 
 rem 环境信息
-cls
+rem cls
 echo "1.context->dev[default]"
 echo "2.context->test"
 echo "3.context->release"
+echo "4.context->wuhan"
+echo "5.context->dev_demo"
+echo "6.context->release_ingress"
 
 set /p context=please input [context] number:
 
 
 rem CPU信息
-cls
+rem cls
 echo "1.CPU->100m[default]"
 echo "2.CPU->200m"
 echo "3.CPU->500m"
 echo "4.CPU->1024m"
+echo "5.CPU->2048m"
 
 set /p cpu=please input [cpu] number:
 
 rem 内存信息
-cls
+rem cls
 echo "1.MEMORY->128Mi[default]"
 echo "2.MEMORY->256Mi"
 echo "3.MEMORY->512Mi"
-echo "4.MEMORY->1024Mi"
+echo "4.MEMORY->768Mi"
+echo "5.MEMORY->1024Mi"
+echo "6.MEMORY->2048Mi"
 
 set /p memory=please input [memory] number:
 
 
 rem 是否执行编译
-cls
+rem cls
 echo "1.ignore"
 echo "2.git clone build project"
 
 set /p build=please input [build] number:
 
 rem 是否执行更新
-cls
+rem cls
 echo "1.ignore"
 echo "2.update k8s pods_services"
+echo "3.deployment k8s pods_services"
 
 set /p update=please input [update] number:
 
@@ -61,15 +68,7 @@ set build=y
 
 rem 更新
 if "%update%"=="" (
-set update=n
-)
-
-if "%update%"=="1" (
-set update=n
-)
-
-if "%update%"=="2" (
-set update=y
+set update=1
 )
 
 rem 环境参数
@@ -88,6 +87,18 @@ set context=test
 
 if "%context%"=="3" (
 set context=release
+)
+
+if "%context%"=="4" (
+set context=wuhan
+)
+
+if "%context%"=="5" (
+set context=dev_demo
+)
+
+if "%context%"=="6" (
+set context=release_ingress
 )
 
 rem CPU参数
@@ -112,6 +123,10 @@ if "%cpu%"=="4" (
 set cpu=1024m
 )
 
+if "%cpu%"=="5" (
+set cpu=2048m
+)
+
 rem MEMORY参数
 
 if "%memory%"=="" (
@@ -131,11 +146,19 @@ set memory=512Mi
 )
 
 if "%memory%"=="4" (
+set memory=768Mi
+)
+
+if "%memory%"=="5" (
 set memory=1024Mi
 )
 
+if "%memory%"=="6" (
+set memory=2048Mi
+)
+
 rem 打印信息确认
-cls
+rem cls
 echo --------------------
 echo tag:%tag%
 echo context:%context%
