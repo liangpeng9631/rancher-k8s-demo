@@ -8,9 +8,6 @@ rem cls
 echo "1.context->dev[default]"
 echo "2.context->test"
 echo "3.context->release"
-echo "4.context->wuhan"
-echo "5.context->dev_demo"
-echo "6.context->release_ingress"
 
 set /p context=please input [context] number:
 
@@ -87,18 +84,6 @@ set context=test
 
 if "%context%"=="3" (
 set context=release
-)
-
-if "%context%"=="4" (
-set context=wuhan
-)
-
-if "%context%"=="5" (
-set context=dev_demo
-)
-
-if "%context%"=="6" (
-set context=release_ingress
 )
 
 rem CPU参数
