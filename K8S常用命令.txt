@@ -22,7 +22,7 @@ http://{ip}:{port}/r/projects/{环境编号}}/kubernetes:6443
 
 
 #node 管理
-#业务场景 几点名称为10-10-99-138的主机
+#业务场景 节点名称为10-10-99-138的主机
 
 将k8s-node1节点设置为不可调度模式
 kubectl cordon 10-10-99-138
