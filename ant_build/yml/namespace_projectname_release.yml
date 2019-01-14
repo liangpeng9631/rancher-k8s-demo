@@ -60,6 +60,30 @@ spec:
             cpu: "{cpu}"
             #限制内存最大用量
             memory: "{memory}"
+        #环境变量
+        env:
+        #堆内存
+        - name: heap
+        #堆内存值,例子128m        
+          value: "{heap}"
+        #存活探针
+        #livenessProbe:
+          #get方式
+          #httpGet:
+            #检测链接
+            #path: /index/index
+            #端口
+            #port: 80
+            #方式
+            #scheme: HTTP
+          #初始化
+          #initialDelaySeconds: 60
+          #检测间隔
+          #periodSeconds: 5
+          #超时时间
+          #timeoutSeconds: 5
+          #应用错误判定次数
+          #failureThreshold: 3
       #实际目录挂载
       volumes:
       - name: time
