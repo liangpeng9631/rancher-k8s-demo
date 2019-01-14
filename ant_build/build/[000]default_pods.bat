@@ -18,6 +18,7 @@ set "str=!str:{tagVal}=%node%!"
 set "str=!str:{img}=%imagesRegistryIp%:%imagesRegistryPort%/%name%:%tag%!"
 set "str=!str:{cpu}=%cpu%!"
 set "str=!str:{memory}=%memory%!"
+set "str=!str:{heap}=%heap%!"
 
 echo !str!>>%tmpFile%
 )
