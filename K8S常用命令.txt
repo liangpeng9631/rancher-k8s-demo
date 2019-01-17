@@ -32,3 +32,9 @@ kubectl drain 10-10-99-138
 
 #执行完维护后，将节点重新加入调度
 kubectl uncordon 10-10-99-138
+
+#pods数量修改
+kubectl scale deployment kubernetes-dashboard --replicas {size} -n {namespace}
+
+#删除pods
+kubectl delete pods {podsName} -n {namespace} --grace-period=0 --force
