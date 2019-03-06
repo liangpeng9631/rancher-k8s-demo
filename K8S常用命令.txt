@@ -32,3 +32,19 @@ kubectl drain 10-10-99-138
 
 #执行完维护后，将节点重新加入调度
 kubectl uncordon 10-10-99-138
+
+#编辑部署文件
+kubectl edit deployment/kubernetes-dashboard -n kube-system
+
+#查看svc网路明细
+kubectl describe svc -n kube-system
+
+#查看token
+kubectl describe secret dashboard-ui -n kube-system
+
+#创建deploy 镜像拉取私有镜像库权限
+kubectl create secret docker-registry ${deploy.yml文件中imagePullSecrets下name的值} \
+--docker-server=${镜像库地址} \
+--docker-username=${镜像库账户} \
+--docker-password=${镜像库密码} \
+-n ${命名空间}
