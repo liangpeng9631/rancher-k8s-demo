@@ -1,0 +1,11 @@
+1.dns扫描行超出范围
+
+表象:
+Search Line limits were exceeded, 
+some dns names have been omitted, 
+the applied search line is: hotel.svc.cluster.local svc.cluster.local cluster.local kubelet.kubernetes.rancher.internal kubernetes.rancher.internal rancher.internal
+Error syncing pod
+
+处理方式:
+#编辑/etc/resolv.conf
+#删除Search这一行通常在最后一行
