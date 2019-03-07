@@ -32,7 +32,7 @@ spec:
       #容器开放端口
       targetPort: 80
   #类型
-  type: NodePort
+  type: ClusterIP
   #对外开放的IP地址
   externalIPs:
     #地址
