@@ -19,9 +19,9 @@ mkdir -p /data/
 
 cd /data/;
 
-wget http://oh7g4ad14.bkt.clouddn.com/docker-engine-selinux-1.12.6-1.el7.centos.noarch.rpm;
+wget http://docker-snake.cn-bj.ufileos.com/docker-engine-selinux-1.12.6-1.el7.centos.noarch.rpm;
 
-wget http://oh7g4ad14.bkt.clouddn.com/docker-engine-1.12.6-1.el7.centos.x86_64.rpm;
+wget http://docker-snake.cn-bj.ufileos.com/docker-engine-1.12.6-1.el7.centos.x86_64.rpm;
 
 mkdir -p docker;
 
