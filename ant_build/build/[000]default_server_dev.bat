@@ -26,5 +26,5 @@ set rancherApiKey=
 
 rem rancherApi地址 http://{服务器IP}:{端口}/r/projects/{环境编号}/kubernetes:6443
 set rancherApiUrl=
-                                                                        
+
 rem ------------------------------ 配置 ------------------------------
