@@ -10,7 +10,7 @@
 	<property name="basePath" location="../../../project/${pjcontext}/${projectName}"/><!-- 需要修改 -->
 	
 	<!-- 配置文件保存路径 -->
-    <property name="confDoc"  location="${basePath}/${projectName}/doc/conf/${pjcontext}"/><!-- 需要修改 -->
+    <property name="confDoc"  location="${basePath}/doc/conf/${pjcontext}"/><!-- 需要修改 -->
 	
 	<!-- 编译后的class路径 -->
 	<property name="build"    location="${basePath}/WebContent/"/>
