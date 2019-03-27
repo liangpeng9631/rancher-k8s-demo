@@ -53,5 +53,5 @@ kubectl create secret docker-registry ${deploy.yml文件中imagePullSecrets下na
 --cpuset-cpus=0多核CPU下绑定cpu核心标记  0-3范围 0,3多个
 -m 限制内存 -m 512m 限制512m内存
 
-cpu-period:调用周期长度
-cpu-quota:调用周期内分配运算时间
+cpu-period:设定docker运行容器重新分配CPU时间的周期(单位微秒) 1000微秒=1毫秒  最大值1000000=1秒
+cpu-quota:在设置周期内分配给当前容器的CPU执行时间
