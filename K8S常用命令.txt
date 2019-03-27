@@ -52,3 +52,6 @@ kubectl create secret docker-registry ${deploy.yml文件中imagePullSecrets下na
 #docker资源限制
 --cpuset-cpus=0多核CPU下绑定cpu核心标记  0-3范围 0,3多个
 -m 限制内存 -m 512m 限制512m内存
+
+cpu-period:调用周期长度
+cpu-quota:调用周期内分配运算时间
