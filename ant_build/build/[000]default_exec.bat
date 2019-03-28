@@ -35,6 +35,11 @@ cd %name%
 call git tag %tag% -l -n >> ..\..\..\logs\%context%\%projectPort%_%k8sName%.log
 )
 
+rem netcore 项目编译
+if %type%==netcore (
+call dotnet publish --output %dir%..\project\%context%\%name%\publish
+)
+
 rem 执行ant脚本 pjname 名称 pjcontext 环境 pjip 服务器IP pjport 端口 pjuser 用户 pjpassword 密码 pjrunport 容器端口
 cd %dir%bin\standard
 if %build%==y (
@@ -56,7 +61,7 @@ rem 重新部署
 if %update%==3 (
 call [000]default_deployment_push.bat
 )
-
+echo
 rem 输出选项
 rem cls
 echo -------------------
@@ -70,7 +75,13 @@ echo port:%projectPort%
 echo node:%node%
 echo namespace:%k8sNamespace%
 echo appname:%k8sName%
+
+if %imagesRegistryPort% == 0 (
+echo images:%imagesRegistryIp%/%name%:%tag%
+) else (
 echo images:%imagesRegistryIp%:%imagesRegistryPort%/%name%:%tag%
+)
+
 echo --------------------
 
 rem 记录tag消息
