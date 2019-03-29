@@ -9,3 +9,12 @@ Error syncing pod
 处理方式:
 #编辑/etc/resolv.conf
 #删除Search这一行通常在最后一行
+
+表象:
+/lib/modules/4.20.13-1.el7.elrepo.x86_64 rbd: failed to load rbd kernel module (1) rbd: sysfs write failed In some cases useful info is found in syslog - try "dmesg |
+ tail" or so. rbd: map failed: (2) No such file or directory
+
+处理方式
+ kubelet: 
+    extra_binds: 
+      - "/lib/modules:/lib/modules"
