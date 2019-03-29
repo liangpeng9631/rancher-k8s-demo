@@ -18,7 +18,7 @@ rem 项目端口
 set projectPort=20000
 
 rem 项目类型 php/java
-set type=php
+set type=php_fpm
 
 rem 地址
 set url=https://gitee.com/aisao/k8s_php_project_demo.git
