@@ -91,26 +91,11 @@ sudo docker run -d --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro 
 # rancher文档:
 https://rancher.com/docs/rancher/v1.6/zh/kubernetes/
 
-# JAVA例子项目:
-https://gitee.com/aisao/k8s_java_project_demo
+# JAVA(Jetty+JFinal)例子项目:
+https://gitee.com/aisao/k8s_java_project_demo.git
 
-# PHP例子项目:
-https://gitee.com/aisao/k8s_php_project_demo
+# PHP(ngx+php5.6+yaf)例子项目:
+https://gitee.com/aisao/k8s_php_project_demo.git
 
-# dotnet core 2.1例子项目
-https://gitee.com/aisao/k8s_dnet_project_demo
-
-# JAVA卡夫卡队列生产者例子项目:
-https://gitee.com/aisao/k8s_java_kafka_pdt_demo
-
-# JAVA卡夫卡队列消费者例子项目:
-https://gitee.com/aisao/k8s_java_kafka_cmt_demo
-
-# JAVA基础镜像:
-docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/centos_jdk_18065:v1.0
-
-# NGX_PHP基础镜像:
-docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/centos_ngx_php:v1.0
-
-# dnet基础镜像:
-docker pull registry.cn-qingdao.aliyuncs.com/snake_k8s/dotnet:2.1-aspnetcore-runtime
+# dotnet core 例子项目:
+https://gitee.com/aisao/k8s_dnet_project_demo.git
