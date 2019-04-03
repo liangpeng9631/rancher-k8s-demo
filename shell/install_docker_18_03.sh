@@ -51,7 +51,7 @@ sed -ri '/^[^#]*swap/s@^@#@' /etc/fstab
 ####################
 
 #安装docker所需的依赖
-yum -y install policycoreutils-python selinux-policy-base selinux-policy-targeted libseccomp libtool-ltdl device-mapper-libs pigz lvm2 yum-plugin-ovl
+yum -y install yum-utils device-mapper-persistent-data policycoreutils-python selinux-policy-base selinux-policy-targeted libseccomp libtool-ltdl device-mapper-libs pigz lvm2 yum-plugin-ovl
 
 ########################
 ####下载并安装docker###############################################################################################
