@@ -16,3 +16,8 @@ EOF
 
 
 "storage-opts":["overlay2.override_kernel_check=true"
+
+
+curl http://docker-snake.cn-bj.ufileos.com/update_kernel.sh | bash
+
+curl http://docker-snake.cn-bj.ufileos.com/install_docker_18_03.sh | bash
