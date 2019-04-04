@@ -24,7 +24,7 @@ curl http://docker-snake.cn-bj.ufileos.com/update_kernel.sh | bash
 curl http://docker-snake.cn-bj.ufileos.com/install_docker_18_03.sh | bash
 
 
-
+mount /dev/vdb /data/
 
 
 
@@ -46,3 +46,19 @@ mkfs.ext4 /dev/sdb1
 
 mkfs.xfs -n ftype=1 /dev/mapper/centos-root  //重新格式化device，在此
 mkfs.xfs -n ftype=1 /dev/vda
+
+
+
+vi /lib/systemd/system/docker.service
+
+-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+
+systemctl daemon-reload
+
+
+#初始化
+docker swarm init --advertise-addr 10.25.10.163
+SWMTKN-1-1kbytqsyjtli738z2irxueb3bg6bfdnn7bzgp0npahral6sgrd-5avh9yu024972c1rbjgszdeh5 10.25.10.163:2377
+
+#加入集群
+docker swarm join --token SWMTKN-1-1kbytqsyjtli738z2irxueb3bg6bfdnn7bzgp0npahral6sgrd-5avh9yu024972c1rbjgszdeh5 10.25.10.163:2377
