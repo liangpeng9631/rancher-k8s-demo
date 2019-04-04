@@ -39,3 +39,7 @@ grubby --default-kernel
 
 #
 echo please reboot
+
+######################
+####升级完内核需要重新挂载服务器磁盘 mount /dev/vdb /data/
+######################
