@@ -1,4 +1,5 @@
 
+yum update xfsprogs -y
 
 http://docker-snake.cn-bj.ufileos.com/container-selinux-2.74-1.el7.noarch.rpm
 
@@ -21,3 +22,27 @@ EOF
 curl http://docker-snake.cn-bj.ufileos.com/update_kernel.sh | bash
 
 curl http://docker-snake.cn-bj.ufileos.com/install_docker_18_03.sh | bash
+
+
+
+
+
+
+ yum-utils device-mapper-persistent-data policycoreutils-python selinux-policy-base selinux-policy-targeted libseccomp libtool-ltdl device-mapper-libs pigz lvm2 yum-plugin-ovl
+ 
+ 
+ 
+d_type查看
+xfs_info /
+ 
+查看磁盘文件系统类型
+parted -l
+
+
+格式化
+fdisk -l
+mkfs.ext4 设备
+mkfs.ext4 /dev/sdb1
+
+mkfs.xfs -n ftype=1 /dev/mapper/centos-root  //重新格式化device，在此
+mkfs.xfs -n ftype=1 /dev/vda
