@@ -55,6 +55,7 @@ kubectl describe node 192-168-32-152
 
 #docker资源限制
 --cpuset-cpus=0多核CPU下绑定cpu核心标记  0-3范围 0,3多个
+--cpu-shares=1024 繁忙时段所占CPU比例
 -m 限制内存 -m 512m 限制512m内存
 
 cpu-period:设定docker运行容器重新分配CPU时间的周期(单位微秒) 1000微秒=1毫秒  最大值1000000=1秒
