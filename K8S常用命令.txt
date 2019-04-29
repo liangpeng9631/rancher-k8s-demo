@@ -52,6 +52,8 @@ kubectl create secret docker-registry ${deploy.yml文件中imagePullSecrets下na
 #查看节点明细
 kubectl describe node 192-168-32-152
 
+#清理pods
+kubectl delete pods <pod> -n 命名空间 --grace-period=0 --force
 
 #docker资源限制
 --cpuset-cpus=0多核CPU下绑定cpu核心标记  0-3范围 0,3多个
