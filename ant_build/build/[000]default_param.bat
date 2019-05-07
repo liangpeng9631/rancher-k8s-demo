@@ -11,6 +11,7 @@ echo "3.context->release"
 echo "4.context->wuhan"
 echo "5.context->dev_demo"
 echo "6.context->release_ingress"
+echo "7.context->utest"
 
 set /p context=please input [context] number:
 
@@ -99,6 +100,10 @@ set context=dev_demo
 
 if "%context%"=="6" (
 set context=release_ingress
+)
+
+if "%context%"=="7" (
+set context=utest
 )
 
 rem CPU参数

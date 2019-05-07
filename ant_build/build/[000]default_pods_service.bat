@@ -1,6 +1,8 @@
+rem 服务
+
 setlocal ENABLEDELAYEDEXPANSION
 
-set fileService=%dir%..\yml\namespace_projectname_service.yml 
+set fileService=%dir%..\yml\service_%context%.yml 
 set tmpServiceFile=%dir%..\yml_k8s\%context%\%k8sNamespace%_%k8sName%_service.yml
 
 if exist %tmpServiceFile% (

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ngx_php" default="dist" basedir=".">
+
+    <description> PHP WEB 项目构建 </description>
+
+    <!-- 项目名称/代码文件夹名称 -->
+    <property name="projectName" value="${pjname}"/><!-- 需要修改 -->
+
+    <!-- 项目根路径 -->
+    <property name="basePath" location="../../../project/${pjcontext}/${projectName}"/><!-- 需要修改 -->
+
+    <!-- 配置文件执行路径 -->
+    <property name="conf"     location="${basePath}/conf"/><!-- 需要修改 -->
+
+    <!-- 配置文件保存路径 -->
+    <property name="confDoc"  location="${basePath}/doc/conf/${pjcontext}"/><!-- 需要修改 -->
+
+    <!-- 编译后的class路径 -->
+    <property name="build"    location="${basePath}/build/"/>
+
+    <!-- 构建镜像文件路径 -->
+    <property name="buildFile"      location="../base_file/php_fpm/${pjcontext}"/>
+
+    <!-- 服务器信息 -->
+    <property name="ip"        value="${pjip}"/>
+    <property name="port"      value="${pjport}"/>
+    <property name="user"      value="${pjuser}"/>
+    <property name="password"  value="${pjpassword}"/>
+    <property name="work"      value="/data/server/${projectName}"/>
+    <property name="runPort"   value="${pjrunport}"/>
+
+    <!-- 项目目录初始化 -->
+    <target name="init">
+        <mkdir dir="${build}"/>
+    </target>
+
+    <!-- 拷贝项目文件 -->
+    <target name="copyResource" depends="init">
+
+        <!-- 拷贝配置文件 -->
+        <copy todir="${conf}" overwrite="true">
+            <fileset dir="${confDoc}">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <!-- 拷贝全部文件 -->
+        <copy todir="${build}" overwrite="true">
+            <fileset dir="${basePath}">
+                <include name="application/**" />
+                <include name="conf/**" />
+                <include name="public/**" />
+                <include name="nginx/**" />
+                <include name="php56/**" />
+            </fileset>
+        </copy>
+
+        <!-- 拷贝构建镜像的资源文件 -->
+        <copy todir="${build}" overwrite="true">
+            <fileset dir="${buildFile}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- 生成压缩包/部署文件 -->
+    <target name="dist" depends="copyResource" description="">
+
+        <!-- 初始化目录 -->
+        <sshexec host="${ip}" username="${user}"  password="${password}" trust="true" command="rm -rf /data/server/${projectName}/;mkdir -p /data/server/${projectName}/" port="${port}"/>
+
+        <!-- 拷贝文件至远程站点 -->
+        <scp todir="${user}@${ip}:${work}" password="${password}" trust="true" port="${port}">
+            <fileset dir="${build}"/>
+        </scp>
+
+        <!-- 重新启动服务 -->
+        <sshexec host="${ip}" username="${user}"  password="${password}" trust="true" command="sed -i 's/#/${projectName}/g' /data/server/${projectName}/DockerFile /data/server/${projectName}/nginx/conf/vhost.d/[00]0.0.0.0.conf;dos2unix /data/server/${projectName}/*.sh;chmod -R 775 /data/server;/data/server/${projectName}/build_images.sh ${projectName} ${prip} ${prport} ${ptag}" port="${port}"/>
+
+        <!-- 清理缓存文件 -->
+        <delete dir="${build}"/>
+
+    </target>
+
+</project>

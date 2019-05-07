@@ -24,7 +24,7 @@ set k8sPortIp=
 rem rancherApi秘钥 Authorization:[空格]Bearer[空格]BASE64(Basic[空格]BASE64(<AccessKey>:<SecretKey>))
 set rancherApiKey=
 
-rem rancherApi地址 http://{服务器IP}:{端口}/r/projects/{环境编号}/kubernetes:6443
+rem rancherApi地址
 set rancherApiUrl=
   
 rem ------------------------------ 配置 ------------------------------

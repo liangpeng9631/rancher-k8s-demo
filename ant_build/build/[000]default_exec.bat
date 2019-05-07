@@ -6,7 +6,7 @@ set dir=%~dp0
 
 rem --------------------------------------------------
 rem JDK
-set java_bin=%dir%..\..\jdk\
+set java_bin=%dir%..\..\Java\jdk1.8.0_66\
 
 rem 设置java环境变量
 set path=%java_bin%bin;.;%java_bin%lib\dt.jar;%java_bin%lib\tools.jar;%path%
@@ -14,7 +14,7 @@ rem --------------------------------------------------
 
 rem 引入通用服务配置
 cd %dir%
-call [000]default_server_%context%.bat
+call conf\[000]default_server_%context%.bat
 
 rem 进入对应环境目录[内网|集成|正式]
 cd %dir%..\project\%context%
@@ -33,11 +33,6 @@ call git clone -b %tag% %url% %name%
 rem 记录tag说明信息
 cd %name%
 call git tag %tag% -l -n >> ..\..\..\logs\%context%\%projectPort%_%k8sName%.log
-)
-
-rem netcore 项目编译
-if %type%==netcore (
-call dotnet publish --output %dir%..\project\%context%\%name%\publish
 )
 
 rem 执行ant脚本 pjname 名称 pjcontext 环境 pjip 服务器IP pjport 端口 pjuser 用户 pjpassword 密码 pjrunport 容器端口
@@ -61,7 +56,7 @@ rem 重新部署
 if %update%==3 (
 call [000]default_deployment_push.bat
 )
-echo
+
 rem 输出选项
 rem cls
 echo -------------------

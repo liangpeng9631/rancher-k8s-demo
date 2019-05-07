@@ -1,0 +1,6 @@
+FROM ykb_centos_ngx_php
+COPY ./ /data/server/#
+COPY nginx /data/nginx
+WORKDIR /data/server/
+EXPOSE 80
+CMD ["/data/server/#/run.sh"]

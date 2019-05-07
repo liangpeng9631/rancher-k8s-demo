@@ -12,25 +12,31 @@ call [000]default_param.bat
 rem ------------------------------ 配置 ------------------------------
 
 rem 项目名称
-set name={####}
+set name={######}
 
 rem 项目端口
-set projectPort={####}
+set projectPort={######}
 
-rem 项目类型 php/java
-set type={####}
+rem 项目类型 crond/fpm/java/lumen/netcore/ngx/php
+set type=php
 
 rem 地址
-set url={####}
+set url={######}
 
 rem yml-k8s项目名称
-set k8sName={####}
+set k8sName={######}
 
 rem yml-k8s命名空间
-set k8sNamespace={####}
+set k8sNamespace={######}
 
 rem 节点标签
-set node={####}
+set node={######}
+
+rem 存活检测url
+set k8sWorkingCheck={######}
+
+rem 镜像拉取秘钥
+set registryKey={######}
 
 rem ------------------------------ 配置 ------------------------------
 

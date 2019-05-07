@@ -1,0 +1,5 @@
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
+COPY ./ /data/server/#
+WORKDIR /data/server/
+EXPOSE 80
+CMD ["dotnet","/data/server/#/#.dll"]
