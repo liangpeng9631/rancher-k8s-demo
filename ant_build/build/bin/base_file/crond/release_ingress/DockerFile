@@ -1,4 +1,0 @@
-FROM ykb_centos_crond
-COPY ./ /data/server/#
-WORKDIR /data/server/
-CMD ["/data/server/#/root.sh"]

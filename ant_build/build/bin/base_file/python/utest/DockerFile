@@ -1,6 +1,0 @@
-FROM ykb_centos_py372
-COPY ./ /data/server/#projectName#
-COPY nginx /data/nginx
-WORKDIR /data/server/
-EXPOSE 80
-CMD ["/data/server/#projectName#/run.sh"]

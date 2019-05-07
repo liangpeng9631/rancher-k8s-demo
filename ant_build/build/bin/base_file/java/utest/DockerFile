@@ -1,5 +1,0 @@
-FROM ykb_centos_jdk_18191
-COPY ./ /data/server/#
-WORKDIR /data/server/
-EXPOSE 80
-CMD  ["/data/server/#/server.sh","start","80",">/dev/null","2>&1"]
