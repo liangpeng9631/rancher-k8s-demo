@@ -1,0 +1,8 @@
+#pods读取模板规则
+类型(pods/service)_项目种类(java/php/ngx)_环境(dev/test/release).yml
+
+#service读取模板规则
+类型(pods/service)_环境(dev/test/release).yml
+
+#创建模板规则
+命名空间_项目名称.yml

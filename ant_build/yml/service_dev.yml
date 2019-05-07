@@ -1,0 +1,39 @@
+#服务
+kind: Service
+apiVersion: v1
+#数据描述[元数据]
+metadata:
+  #名称
+  name: {project}
+  #命名空间
+  namespace: {namespace}
+  #标签
+  labels:
+    #对应的应用标签
+    app: {project}
+    #对应的应用版本
+    version: {version}
+#规格
+spec:
+  #容器
+  selector:
+    #应用
+    app: {project}
+    #对应的应用版本
+    version: {version}
+  #端口
+  ports:
+      #名称
+    - name: {project}
+      #协议
+      protocol: TCP
+      #对外开放端口
+      port: {port}
+      #容器开放端口
+      targetPort: 80
+  #类型
+  type: ClusterIP
+  #对外开放的IP地址
+  externalIPs:
+    #地址
+    - {portip}
