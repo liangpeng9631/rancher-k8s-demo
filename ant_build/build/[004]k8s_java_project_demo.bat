@@ -17,7 +17,7 @@ set name=k8s_java_project_demo
 rem 项目端口
 set projectPort=20001
 
-rem 项目类型 php/java
+rem 项目类型 crond/fpm/java/lumen/netcore/ngx/php
 set type=java
 
 rem 地址
@@ -31,6 +31,12 @@ set k8sNamespace=demo
 
 rem 节点标签
 set node=service
+
+rem 存活检测url
+set k8sWorkingCheck=/index/index
+
+rem 镜像拉取秘钥
+set registryKey=ykb
 
 rem ------------------------------ 配置 ------------------------------
 
