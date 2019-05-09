@@ -33,6 +33,12 @@ kubectl drain 10-10-99-138
 #执行完维护后，将节点重新加入调度
 kubectl uncordon 10-10-99-138
 
+#节点设置标签
+kubectl label nodes 192-168-32-178 uname=snake
+
+#节点删除标签
+kubectl label nodes 192-168-32-178 uname-
+
 #编辑部署文件
 kubectl edit deployment/kubernetes-dashboard -n kube-system
 
