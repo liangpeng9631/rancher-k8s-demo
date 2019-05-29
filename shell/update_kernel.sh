@@ -17,6 +17,9 @@ sed -ri '/^[^#]*SELINUX=/s#=.+$#=disabled#' /etc/selinux/config
 #安装wget用于下载远端安装包
 yum -y install wget
 
+#安装linux-firmware,升级内核所需的依赖
+yum install -y linux-firmware
+
 #创建/data/目录
 mkdir -p /data/
 
