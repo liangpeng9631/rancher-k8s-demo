@@ -35,7 +35,7 @@ rpm -ivh kernel-ml-devel-4.20.13-1.el7.elrepo.x86_64.rpm
 rpm -ivh kernel-ml-4.20.13-1.el7.elrepo.x86_64.rpm
 
 #修改内核启动顺序,默认启动的顺序应该为1,升级以后内核是往前面插入,为0（如果每次启动时需要手动选择哪个内核,该步骤可以省略）
-grub2-set-default  0 && grub2-mkconfig -o /etc/grub2.cfg
+grub2-set-default 0 && grub2-mkconfig -o /etc/grub2.cfg
 
 #使用下面命令看看确认下是否启动默认内核指向上面安装的内核
 grubby --default-kernel
