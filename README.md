@@ -81,7 +81,7 @@ docker push 10.23.187.165:5000/nginx:test
 ###### //至此,docker环境交付完毕
 
 #### 3.交付rancher,生产环境需要数据库外挂方式部署,参照官方文档
-sudo docker run -d --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro -p 8080:8080 rancher/server:v1.6.26
+sudo docker run -d --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro -p 8080:8080 rancher/server:v1.6.28
 ###### //若干分钟就可以通过8080端口访问rancher后台
 ###### //添加自己的管理员账号密码
 ###### //在系统设置增加自定义应用商店
