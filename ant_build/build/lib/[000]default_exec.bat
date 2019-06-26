@@ -6,7 +6,7 @@ set dir=%~dp0
 
 rem --------------------------------------------------
 rem JDK
-set java_bin=%dir%..\..\..\Java\jdk1.8.0_66\
+set java_bin=%dir%..\..\..\Java\
 
 rem 设置java环境变量
 set path=%java_bin%bin;.;%java_bin%lib\dt.jar;%java_bin%lib\tools.jar;%path%
