@@ -1,4 +1,4 @@
-FROM ykb_centos_jdk_18191
+FROM uhub.service.ucloud.cn/pub_snake/pub_centos_jdk_191:v190307001
 COPY ./ /data/server/#
 WORKDIR /data/server/
 EXPOSE 80
