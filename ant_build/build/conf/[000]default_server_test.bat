@@ -21,10 +21,11 @@ set imagesRegistryPort=
 rem yml-k8s访问IP
 set k8sPortIp=
 
-rem rancherApi秘钥 Authorization:[空格]Bearer[空格]BASE64(Basic[空格]BASE64(<AccessKey>:<SecretKey>))
+rem rancher1.6.x Api秘钥 Authorization:[空格]Bearer[空格]BASE64(Basic[空格]BASE64(<AccessKey>:<SecretKey>))
+rem racnher2.2.x Api秘钥 Bearer Token的值
 set rancherApiKey=
 
 rem rancherApi地址
 set rancherApiUrl=
-  
+
 rem ------------------------------ 配置 ------------------------------
