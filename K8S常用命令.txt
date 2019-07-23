@@ -74,3 +74,11 @@ cpu-quota:在设置周期内分配给当前容器的CPU执行时间
 
 #更新运行中的docker限制
 docker update -m 4000m --memory-swap -1 ${name}
+
+
+#istio------------------------------------
+#查看虚拟服务
+kubectl get virtualservice
+
+#
+kubectl get destinationrule
