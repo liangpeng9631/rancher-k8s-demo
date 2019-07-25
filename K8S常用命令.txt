@@ -82,3 +82,6 @@ kubectl get virtualservice
 
 #
 kubectl get destinationrule
+
+#
+kubectl describe virtualservice
