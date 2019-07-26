@@ -83,5 +83,8 @@ kubectl get virtualservice
 #
 kubectl get destinationrule
 
-#
+#查看虚拟服务详情
 kubectl describe virtualservice
+
+#
+kubectl label namespace <namespace> istio-injection=enabled
