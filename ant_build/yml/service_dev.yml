@@ -24,7 +24,7 @@ spec:
   #端口
   ports:
       #名称
-    - name: {project}
+    - name: http
       #协议
       protocol: TCP
       #对外开放端口
