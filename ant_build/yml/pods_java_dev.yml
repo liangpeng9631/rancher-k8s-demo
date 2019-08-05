@@ -36,9 +36,9 @@ spec:
 
 
 
-
-
-
+      #容器拉取权限
+      imagePullSecrets:
+        - name : {registryKey}
       #容器
       containers:
         #名称
