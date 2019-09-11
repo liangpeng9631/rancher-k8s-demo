@@ -84,9 +84,9 @@ rpm -ivh docker-ce-18.06.3.ce-3.el7.x86_64.rpm
 service docker start
 
 #设置docker镜像库源地址与默认日志的大小和文件系统类型
-tee /etc/docker/daemon.json <<-'EOF'
-{"registry-mirrors":["https://7bezldxe.mirror.aliyuncs.com/"],"log-driver":"json-file","log-opts":{"max-size":"5m"},"storage-driver":"overlay2","storage-opts":["overlay2.override_kernel_check=true"]}
-EOF
+#tee /etc/docker/daemon.json <<-'EOF'
+#{"registry-mirrors":["https://7bezldxe.mirror.aliyuncs.com/"],"log-driver":"json-file","log-opts":{"max-size":"5m"},"storage-driver":"overlay2","storage-opts":["overlay2.override_kernel_check=true"]}
+#EOF
 
 #重新启动docker
 service docker restart
