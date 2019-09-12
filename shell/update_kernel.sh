@@ -27,8 +27,8 @@ mkdir -p /data/
 cd /data/;
 
 #下载安装包
-wget http://docker-snake.cn-bj.ufileos.com/kernel-ml-4.20.13-1.el7.elrepo.x86_64.rpm
-wget http://docker-snake.cn-bj.ufileos.com/kernel-ml-devel-4.20.13-1.el7.elrepo.x86_64.rpm
+wget https://github.com/liangpeng9631/rancher-k8s-demo/raw/master/rpm/kernel-ml-4.20.13-1.el7.elrepo.x86_64.rpm
+wget https://github.com/liangpeng9631/rancher-k8s-demo/raw/master/rpm/kernel-ml-devel-4.20.13-1.el7.elrepo.x86_64.rpm
 
 #通过安装更新内核
 rpm -ivh kernel-ml-devel-4.20.13-1.el7.elrepo.x86_64.rpm

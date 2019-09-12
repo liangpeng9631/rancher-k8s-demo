@@ -73,9 +73,8 @@ mkdir -p docker;
 ln -s /data/docker /var/lib/docker;
 
 #下载远端安包
-wget https://docker-snake.cn-bj.ufileos.com/container-selinux-2.74-1.el7.noarch.rpm
-wget https://docker-snake.cn-bj.ufileos.com/docker-ce-18.06.3.ce-3.el7.x86_64.rpm
-
+wget https://github.com/liangpeng9631/rancher-k8s-demo/raw/master/rpm/container-selinux-2.74-1.el7.noarch.rpm
+wget https://github.com/liangpeng9631/rancher-k8s-demo/raw/master/rpm/docker-ce-18.06.3.ce-3.el7.x86_64.rpm
 #通过安装包安装docker
 rpm -ivh container-selinux-2.74-1.el7.noarch.rpm
 rpm -ivh docker-ce-18.06.3.ce-3.el7.x86_64.rpm
@@ -90,3 +89,6 @@ service docker start
 
 #重新启动docker
 service docker restart
+
+#docker加入开机自启
+systemctl enable docker
