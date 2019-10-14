@@ -92,10 +92,10 @@ sudo docker run -d --restart=unless-stopped -v /etc/localtime:/etc/localtime:ro 
 https://rancher.com/docs/rancher/v1.6/zh/kubernetes/
 
 # JAVA(Jetty+JFinal)例子项目:
-https://gitee.com/aisao/k8s_java_project_demo.git
+https://gitee.com/liang-p/k8s_java_project_demo
 
 # PHP(ngx+php5.6+yaf)例子项目:
-https://gitee.com/aisao/k8s_php_project_demo.git
+https://gitee.com/liang-p/k8s_php_project_demo.git
 
 # dotnet core 例子项目:
-https://gitee.com/aisao/k8s_dnet_project_demo.git
+https://gitee.com/liang-p/k8s_dnet_project_demo.git
